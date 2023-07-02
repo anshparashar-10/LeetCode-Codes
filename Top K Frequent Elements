@@ -1,0 +1,25 @@
+class Solution {
+public:
+    vector<int> topKFrequent(vector<int>& nums, int k) {
+        sort(nums.begin(),nums.end());
+        int count=1;
+        priority_queue<pair<int,int>> pq;
+        int i = 0;
+        while(i<nums.size()){
+            int j=i+1;
+            while(j<nums.size() && nums[i]==nums[j]){
+                count++;
+                j++;
+            }
+            pq.push(make_pair(count,nums[i]));
+            i=j;
+            count=1;
+        }
+        vector<int> v;
+        for(int p = 0 ; p<k ; p++){
+            v.push_back(pq.top().second);
+            pq.pop();
+        }
+        return v;
+    }
+};
