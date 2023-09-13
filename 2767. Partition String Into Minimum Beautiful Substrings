@@ -1,0 +1,36 @@
+class Solution {
+public:
+    bool PowerOf5(int n){
+      if(n==0) return false;
+      while(n%5==0){
+        n=n/5;
+      }
+      return(n==1);
+    }
+    int f(int ind,string &s,vector<int> &dp){
+      if(ind == s.size()) return 0;
+      if(s[ind]=='0') return 20;
+
+        if(dp[ind]!=-1) return dp[ind];
+      int val = 0;
+      int ans =20;
+
+      for(int i = ind;i<s.size();i++){
+        val = val*2 + s[i] - '0';
+        // cout<<val<<" "<<ind<<" "<<endl;
+
+        if(PowerOf5(val)){
+          ans = min(ans,1+f(i+1,s,dp));
+        }
+      }
+      return dp[ind]=ans;
+    }
+    int minimumBeautifulSubstrings(string s) {
+        vector<int> dp(s.size(),-1);
+        int ans = f(0,s,dp);
+        if(ans>s.size()){
+          return -1;
+        }
+        return ans;
+    }
+};
