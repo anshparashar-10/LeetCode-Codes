@@ -1,0 +1,17 @@
+class Solution {
+public:
+    bool isMatch(TreeNode* l,TreeNode* r){
+        if(l==NULL && r==NULL) return true;
+        if(l==NULL || r==NULL) return false;
+        bool left,right;
+        if(l->val == r->val){
+            left = isMatch(l->left,r->right);
+            right = isMatch(l->right,r->left);
+        }
+        return (l->val==r->val) && left && right;
+    }
+    bool isSymmetric(TreeNode* root) {
+        if(root==NULL) return true;
+        return isMatch(root->left,root->right);
+    }
+};
