@@ -1,0 +1,28 @@
+class Solution {
+public:
+    void f(string s,string &a){
+        stack<char> st;
+        
+        for(int i = 0;i<s.length();i++){
+            if(s[i]=='#'){
+                if(!st.empty())
+                st.pop();
+            }else{
+                st.push(s[i]);
+            }
+        }
+
+        while(!st.empty()){
+            a+=st.top();
+            st.pop();
+        }
+    }
+    
+    bool backspaceCompare(string s, string t) {
+        string a;
+        string b;
+        f(s,a);
+        f(t,b);
+        return a==b;      
+    }
+};
